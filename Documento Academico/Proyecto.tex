@@ -632,6 +632,130 @@ A partir de esta convergencia se identifica el fundamento conceptual de Rosberto
 
 \clearpage
 
+\section{Metodología de búsqueda del estado del arte}
+
+\subsection{Estrategia de búsqueda}
+
+La estrategia de búsqueda se estructurará mediante la combinación de términos asociados a cuatro conceptos principales: robótica humanoide, aprendizaje robótico, interfaces o plataformas de entrenamiento y métodos de inteligencia artificial aplicados al control y aprendizaje de robots.
+
+Las búsquedas se realizarán mediante operadores booleanos como \texttt{AND} y \texttt{OR}. La estrategia de búsqueda inicial se adaptará posteriormente a la sintaxis específica de cada base de datos, manteniendo los conceptos fundamentales definidos para la revisión.
+
+La ecuación de búsqueda general propuesta es:
+
+\begin{verbatim}
+("humanoid robot" OR "humanoid robots" OR "humanoid robotics"
+OR "robot manipulation")
+AND
+("robot learning" OR "imitation learning"
+OR "learning from demonstration")
+AND
+("interface" OR "framework" OR "platform"
+OR "pipeline" OR "workflow")
+AND
+("training" OR "deployment" OR "teleoperation"
+OR "foundation model" OR "vision language action")
+\end{verbatim}
+
+Como estrategia complementaria, se empleará una ecuación orientada específicamente a identificar interfaces y plataformas destinadas al aprendizaje robótico:
+
+\begin{verbatim}
+("robot learning" OR "humanoid robotics")
+AND
+("user interface" OR "training interface"
+OR "learning framework" OR "learning platform")
+\end{verbatim}
+
+Otra ecuación estará orientada a la adquisición de demostraciones mediante mecanismos de teleoperación:
+
+\begin{verbatim}
+("humanoid robot" OR "robot manipulation")
+AND
+("teleoperation" OR "virtual reality"
+OR "human demonstration")
+AND
+("imitation learning"
+OR "learning from demonstration")
+\end{verbatim}
+
+Asimismo, se empleará una ecuación específica para identificar trabajos relacionados con modelos fundacionales y modelos de visión-lenguaje-acción:
+
+\begin{verbatim}
+("robot learning" OR "humanoid robot")
+AND
+("vision language action" OR "VLA"
+OR "robot foundation model"
+OR "foundation model")
+AND
+("deployment" OR "training" OR "manipulation")
+\end{verbatim}
+
+Las ecuaciones de búsqueda serán adaptadas a las características y sintaxis de cada base de datos y motor de búsqueda, procurando mantener equivalencia entre los conceptos utilizados y garantizar la reproducibilidad del proceso.
+
+\subsection{Bases de datos y fuentes de información}
+
+La búsqueda bibliográfica se llevará a cabo principalmente en bases de datos académicas especializadas en ingeniería, informática, inteligencia artificial y robótica. Las fuentes principales serán \textit{Scopus}, \textit{Web of Science}, \textit{IEEE Xplore} y \textit{ScienceDirect}.
+
+Adicionalmente, se consultarán repositorios científicos como \textit{arXiv} con el propósito de identificar investigaciones recientes, preprints y trabajos relacionados con tendencias emergentes en robótica humanoide, aprendizaje robótico y modelos fundacionales.
+
+Los documentos recuperados de repositorios y otras fuentes complementarias se diferenciarán de los artículos indexados en las principales bases de datos bibliográficas. Estas fuentes podrán utilizarse para complementar la revisión y contextualizar desarrollos tecnológicos recientes, sin considerarlas necesariamente equivalentes a los estudios académicos principales incluidos en el análisis sistemático.
+
+\subsection{Periodo e idiomas de búsqueda}
+
+La revisión abarcará publicaciones comprendidas entre 2020 y 2026. Este intervalo temporal permitirá concentrar el análisis en el desarrollo reciente de técnicas de aprendizaje robótico, modelos fundacionales, teleoperación, conjuntos de datos robóticos y plataformas de entrenamiento.
+
+Se considerarán publicaciones disponibles en inglés y español, debido a que constituyen los principales idiomas de publicación de la literatura científica relacionada con inteligencia artificial, robótica y aprendizaje robótico.
+
+La fecha de cierre de la búsqueda será registrada durante la ejecución de la revisión, con el fin de establecer con precisión el periodo cubierto por los resultados obtenidos.
+
+\subsection{Criterios de inclusión}
+
+Los estudios recuperados durante la búsqueda serán considerados candidatos para la revisión cuando cumplan con los siguientes criterios:
+
+\begin{enumerate}
+\item Haber sido publicados entre 2020 y 2026.
+\item Abordar temas relacionados con el aprendizaje robótico, la robótica humanoide, la manipulación robótica o el control basado en inteligencia artificial.
+\item Presentar una interfaz, plataforma, \textit{framework}, \textit{pipeline}, metodología o arquitectura orientada al entrenamiento, la adquisición de datos, el aprendizaje o el despliegue de modelos robóticos.
+\item Abordar, de manera directa o indirecta, técnicas como el aprendizaje por imitación, el aprendizaje a partir de demostraciones, la teleoperación, los modelos de visión-lenguaje-acción, los modelos fundacionales, el aprendizaje por refuerzo o la transferencia \textit{sim-to-real}.
+\item Presentar una contribución relacionada con la reducción de la complejidad del desarrollo, entrenamiento o despliegue de modelos de inteligencia artificial en robots.
+\item Para los estudios principales de la revisión, corresponder a artículos publicados en revistas, congresos o fuentes académicas indexadas en Scopus o Web of Science.
+\end{enumerate}
+
+\subsection{Criterios de exclusión}
+
+Serán excluidos aquellos documentos que cumplan alguno de los siguientes criterios:
+
+\begin{enumerate}
+\item Haber sido publicados antes de 2020.
+\item No tener relación con el aprendizaje robótico, la inteligencia artificial aplicada a robots o la robótica humanoide.
+\item Concentrarse exclusivamente en aspectos mecánicos, estructurales o electrónicos del robot que no estén relacionados con los procesos de aprendizaje, adquisición de datos o entrenamiento.
+\item Presentar únicamente desarrollos teóricos sin aplicación o evaluación relacionada con robots.
+\item No proporcionar información suficiente para identificar la metodología, arquitectura, implementación o resultados del trabajo.
+\item Corresponder a documentos duplicados identificados en diferentes bases de datos o fuentes de información.
+\item No presentar una relación significativa con el objetivo de simplificar la adquisición de datos, el entrenamiento, la gestión o el despliegue de modelos robóticos.
+\end{enumerate}
+
+\subsection{Proceso de selección de estudios}
+
+El proceso de selección se desarrollará en cuatro etapas principales, de acuerdo con el flujo de trabajo propuesto por PRISMA: identificación, cribado, elegibilidad e inclusión.
+
+Durante la etapa de identificación se recopilarán los documentos obtenidos mediante las ecuaciones de búsqueda aplicadas en las distintas bases de datos y fuentes de información. Posteriormente, se eliminarán los registros duplicados y se realizará un cribado preliminar basado en el título, las palabras clave y el resumen.
+
+Los documentos que superen esta etapa serán evaluados mediante la lectura del texto completo para determinar su elegibilidad de acuerdo con los criterios de inclusión y exclusión establecidos. Finalmente, los estudios que cumplan todos los criterios serán incluidos en la síntesis cualitativa de la revisión.
+
+El número de registros identificados, duplicados eliminados, documentos excluidos durante el cribado, artículos evaluados a texto completo y estudios finalmente incluidos será registrado para su representación mediante un diagrama de flujo PRISMA.
+
+\subsection{Extracción y análisis de información}
+
+De cada estudio seleccionado se extraerá información relacionada con sus características bibliográficas, objetivo, metodología, tecnologías empleadas, tipo de robot, estrategia de aprendizaje, mecanismo de adquisición de datos, interfaz utilizada, método de entrenamiento, mecanismo de despliegue, resultados y limitaciones.
+
+La información recopilada se organizará en una matriz de extracción de datos que permitirá comparar sistemáticamente las características de las diferentes propuestas e identificar similitudes, diferencias, ventajas y limitaciones.
+
+\subsection{Identificación de brechas de investigación}
+
+La comparación de los estudios seleccionados permitirá identificar las principales brechas existentes en el área. En particular, se analizará si las soluciones actuales integran en una misma plataforma los procesos de teleoperación, adquisición y estandarización de datos, entrenamiento de modelos y despliegue sobre hardware robótico.
+
+La identificación de estas brechas permitirá establecer la relación entre el conocimiento existente y la propuesta de investigación. De esta manera, el estado del arte permitirá determinar en qué medida las plataformas y metodologías actuales contribuyen a reducir la barrera técnica para investigadores y estudiantes que trabajan con robots humanoides y, específicamente, qué capacidades requieren integración o adaptación para su aplicación en el Unitree G1 Education Edition.
+
 %\section{Análisis de requerimientos}
 %pendiente
 %\clearpage
