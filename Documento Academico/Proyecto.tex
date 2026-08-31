@@ -90,60 +90,36 @@
 
 \section{Introducción}
 
+El desarrollo contemporáneo de la robótica humanoide ha dejado de ser un campo de investigación exclusivo de simulación para convertirse en una de las fronteras más dinámicas de la Inteligencia Artificial Física (\textit{Physical AI}) \parencite{bjorck2025groot}. Plataformas como el robot bipedal humanoide Unitree G1 Edu combinan un diseño mecánico avanzado de hasta 29 grados de libertad con la capacidad de ejecutar tareas complejas de locomoción y manipulación bimanual en entornos no estructurados \parencite{yan2026rapiddeployment}. Para dotar a estos robots de capacidades autónomas, la investigación científica se ha volcado hacia el uso de Modelos de Visión y Acción (VLA) y paradigmas de aprendizaje robótico como el Aprendizaje por Imitación (\textit{Imitation Learning}) y el Aprendizaje por Refuerzo (\textit{Reinforcement Learning}) \parencite{seo2025learningsimtorealhumanoidlocomotion, yan2026rapiddeployment}.
 
-%\begin{quote}
-%Epilogo""
-%-\cite{}-
-%\end{quote}
+En este contexto surge Rosberto, una plataforma \textit{middleware} de código abierto diseñada bajo el ecosistema de ROS 2. El propósito de esta infraestructura es estandarizar y simplificar el proceso de investigación universitaria sobre el Unitree G1 Edu, actuando como un puente entre la adquisición de datos de teleoperación, la gestión de datasets multimodales bajo el estándar \textit{LeRobot} \parencite{cadene2026lerobotopensourcelibraryendtoend} y el despliegue en tiempo real de políticas de acción inteligentes. Al unificar estos subcomponentes en un flujo de trabajo optimizado, Rosberto permite que estudiantes e investigadores colaboren activamente sobre una base común, reduciendo la distancia que tradicionalmente separa el desarrollo de algoritmos de su ejecución física en el \textit{hardware} real.
 
-%pendiente
+\section{Problema}
 
+A pesar del vertiginoso avance en algoritmos de aprendizaje robótico, el despliegue práctico de políticas de control autónomo en robots humanoides sigue enfrentando un cuello de botella crítico: la falta de procesos y herramientas estandarizadas para la gestión y carga de modelos. Tradicionalmente, enseñar una nueva tarea de manipulación a un robot humanoide requiere un flujo fragmentado e ineficiente que abarca la recolección manual de miles de imágenes, la anotación manual de cuadros delimitadores, el escaneo láser en 3D de objetos y el entrenamiento de modelos de percepción específicos \parencite{yan2026rapiddeployment}. Este flujo de trabajo convencional consume típicamente varios días o semanas por cada nueva habilidad y demanda el uso de \textit{hardware} de escaneo especializado \parencite{yan2026rapiddeployment}.
 
-%\section{Problema}
-Actualmente, el despliegue de robots humanoides para tareas de manipulación y locomoción enfrenta un cuello de botella crítico. La falta de procesos estandarizados provoca que la recolección de datos y despliegue de modelos sobre robots humanoides como el robot Unitree G1 Edu es lento como también irregular por herramientas que sean diseñadas para subcomponentes específicos \parencite{cadene2026lerobotopensourcelibraryendtoend} lo que impacta en tiempo de desarrollo extendidos afectando a los tiempos de desarrollo de la investigación 
-modernos basados en modelos fundacionales pueden reducir el ciclo de despliegue a 30 minutos,
-los flujos tradicionales suelen consumir varios días o semanas por cada nueva tarea debido a la
-recolección manual de datos y entrenamiento complejo.
-Para un estudiante de pregrado, esta alta curva de aprendizaje y la falta de infraestructura para
-centralizar el conocimiento impiden realizar investigación de vanguardia. Además, el elevado costo
-del hardware (aprox. \$16,000 USD) centraliza el acceso a la tecnología. Existe la oportunidad de
-crear una plataforma que democratice este acceso mediante laboratorios teleoperados y
-estandarice la gestión de modelos de Visión y Acción (VLA).
+Aunque recientemente se han diseñado pipelines modulares basados en modelos fundacionales que reducen el ciclo de preparación a aproximadamente 30 minutos \parencite{yan2026rapiddeployment}, estas herramientas se encuentran dispersas en repositorios independientes y carecen de una interfaz común. Como consecuencia, el proceso de desarrollo en las universidades es irregular, lento y dependiente de herramientas aisladas diseñadas para subcomponentes específicos \parencite{cadene2026lerobotopensourcelibraryendtoend}.
 
-%pendiente
-%\clearpage
+Esta fragmentación genera dos problemas fundamentales en el ámbito académico y de pregrado:
+\begin{itemize}
+    \item \textbf{Curva de aprendizaje prohibitiva:} los estudiantes de ingeniería deben invertir meses de trabajo en configurar sistemas operativos, compilar \textit{drivers} de bajo nivel en terminales de línea de comandos, resolver problemas de dependencias de CUDA/PyTorch y coordinar protocolos de red complejos (como transmisiones UDP o seriales) antes de poder cargar su primer modelo de control de movimiento.
+    \item \textbf{Falta de acumulación colectiva de conocimiento:} al no existir un formato unificado o una plataforma que centralice los experimentos, cada grupo de investigación se ve obligado a iniciar el desarrollo desde cero, impidiendo que el conocimiento científico avance de manera incremental mediante la reutilización de datasets y políticas previas.
+\end{itemize}
 
-%\section{Justificación}
+Finalmente, la brecha de acceso se ve agravada por factores socioeconómicos. Un robot humanoide de última generación como el Unitree G1 Edu tiene un costo estimado entre \$42,000 y \$66,000 USD según su configuración, cifra inalcanzable para la gran mayoría de las instituciones educativas de países emergentes, lo que centraliza la investigación y el conocimiento tecnológico en unos pocos laboratorios privilegiados.
 
-Usuarios o beneficiario
-Estudiantes de Pregrado: Que podrán realizar proyectos de investigación aplicada sin
-meses de capacitación previa en drivers de bajo nivel.
-Investigadores y Profesores: Quienes requieren una herramienta para gestionar el ciclo de
-vida de modelos avanzados y acumular conocimiento colectivo.
-Universidades: Que podrán optimizar el uso de hardware costoso mediante un sistema de
-acceso remoto y seguro para múltiples nichos de estudiantes.
-Solución propuesta
-Rosberto es una plataforma middleware para estandarizar la investigación con el robot Unitree G1
-Edu. La solución integra los siguientes pilares técnicos:
-Gestión de Modelos VLA: Facilita la carga y despliegue de modelos de acción avanzados
-(como ACT, $\pi_0$, o GR00T) y modelos base para percepción como FoundationPose (pose 6- DoF zero-shot) y SAM 3D (reconstrucción).
-Estandarización de Datasets: Implementa el formato de datos LeRobot, permitiendo que
-cada sesión de teleoperación contribuya a un repositorio centralizado de aprendizaje por
-imitación (Imitation Learning).
-Teleoperación Inmersiva: Utiliza aplicaciones de realidad virtual (Meta Quest) para
-permitir un control bimanual intuitivo, acelerando la recolección de datos de alta calidad de
-minutos a segundos.
-4. Experiencia o Motivación del Grupo
-Nuestra motivación principal es la democratización de la IA Física. Observamos que la falta de
-estándares genera una brecha educativa donde solo unos pocos pueden investigar en robótica
-humanoide. Inspirados en arquitecturas abiertas como phosphobot y los avances de NVIDIA
-Isaac Lab, buscamos reducir el tiempo de desarrollo de "meses a minutos". Queremos que
-Rosberto sea la herramienta que permita a estudiantes de pregrado publicar investigación de
-impacto, integrando hardware real con modelos de inteligencia artificial de última generación de
-forma segura y colaborativa
-%pendiente
+\section{Justificación}
 
-%\clearpage
+El desarrollo de la plataforma Rosberto se justifica por la necesidad apremiante de democratizar la robótica humanoide y de dotar a la comunidad académica de herramientas que reduzcan de forma drástica los tiempos de preparación experimental. Siguiendo la premisa histórica de que la ciencia avanza de manera colectiva al ``subirse a hombros de gigantes'' \parencite{newton1687}, esta plataforma proporciona un entorno integrado y unificado bajo ROS 2 para estructurar todo el ciclo de aprendizaje robótico (\textit{Teleoperar} $\rightarrow$ \textit{Grabar} $\rightarrow$ \textit{Entrenar} $\rightarrow$ \textit{Desplegar}) \parencite{cadene2026lerobotopensourcelibraryendtoend}.
+
+El impacto y valor de Rosberto se divide en tres ejes fundamentales:
+\begin{enumerate}
+    \item \textbf{Democratización del hardware mediante teleoperación remota:} al incorporar un módulo de laboratorio teleoperado compatible con tecnologías de Realidad Virtual (VR) de bajo costo como Meta Quest \parencite{phosphobot2024}, se facilita el acceso remoto al Unitree G1 Edu real. Estudiantes de diferentes estratos y universidades asociadas podrán cargar y evaluar sus propios modelos en un robot físico real sin la necesidad de que sus instituciones adquieran hardware de alto costo.
+    \item \textbf{Estandarización de datasets y acumulación científica:} el uso nativo del formato universal de datasets de LeRobot de Hugging Face \parencite{cadene2026lerobotopensourcelibraryendtoend} asegura que cada sesión de teleoperación inmersiva se registre como un dataset estandarizado de imitación multimodal. Esto permite la creación de un repositorio centralizado de experiencias robóticas que puede ser compartido, auditado y mejorado por futuras cohortes de estudiantes, construyendo una base sólida de conocimiento colectivo.
+    \item \textbf{Seguridad y eficiencia operativa:} para mitigar el riesgo de daños físicos sobre el hardware real, Rosberto actúa como un middleware supervisor que incluye una capa de seguridad cinemática en ROS 2, la cual intercepta las acciones del modelo para validar límites articulares y de torque en tiempo real antes de su ejecución.
+\end{enumerate}
+
+Al automatizar rutinas de parametrización y simplificar la carga de modelos, Rosberto apunta a reducir el tiempo de parametrización de actuadores y carga de modelos de 1 mes a un 33\%, tomando como referencia plataformas especializadas como The Construct Robotics Institute \parencite{theconstruct2026humanoid}, permitiendo que los investigadores de pregrado dediquen su tiempo a la innovación de algoritmos y a la investigación aplicada en el borde (\textit{Edge Computing}), logrando un uso educativo real, estructurado y de alto impacto de la tecnología humanoide.
 
 \clearpage
 
@@ -688,6 +664,85 @@ A partir de esta convergencia se identifica el fundamento conceptual de Rosberto
 
 \section{Metodología}
 
+Este proyecto aborda una metodología de acción-resultado, en la que se propone una acción que, al llevar a cabo su ejecución, da como resultado el cumplimiento de cada uno de los objetivos específicos del proyecto. Esta correspondencia directa asegura que la viabilidad de Rosberto no dependa de suposiciones, sino de la validación empírica de los componentes de software y control integrados sobre el Unitree G1 Edu.
+
+A continuación se presenta la Tabla \ref{tab:mam-re} con las acciones que se realizarán para cumplir cada uno de los objetivos del proyecto.
+
+\begin{longtable}{|p{3.6cm}|p{5.4cm}|p{5.4cm}|}
+\caption{Matriz de Acciones Metodológicas y Resultados Esperados (MAM-RE)}
+\label{tab:mam-re}\\
+\hline
+\rowcolor{gray!20}
+\textbf{Objetivo Específico} & \textbf{Acción Metodológica} & \textbf{Resultado Esperado} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{gray!20}
+\textbf{Objetivo Específico} & \textbf{Acción Metodológica} & \textbf{Resultado Esperado} \\
+\hline
+\endhead
+
+\textbf{OE-01: Indexación y ordenamiento.} Ordenar y listar modelos visión-acción para cargar por red al Unitree G1 Edu. &
+\textbf{Desarrollo del repositorio de modelos VLA:} construcción del backend y frontend de Rosberto para indexar, clasificar y visualizar modelos VLA (ACT, $\pi_0$, GR00T) compatibles con el Unitree G1. &
+\textbf{Módulo catálogo de modelos:} interfaz que lista los modelos disponibles, detallando arquitectura, hiperparámetros y compatibilidad de datasets. \\
+\hline
+
+\textbf{OE-02: Parametrizar actuadores.} Parametrizar los actuadores del robot para identificar automáticamente cada salida al cargar un modelo. &
+\textbf{Algoritmo de mapeo cinemático:} desarrollo de un módulo de traducción que asocia las acciones generadas por la política $\pi_{\theta}(a_t \mid o_t)$ con los motores y articulaciones del robot real (29 DoF). &
+\textbf{Módulo de mapeo y parametrización automática:} módulo de articulaciones que recibe el vector de salida del modelo VLA y autoconfigura el SDK del Unitree G1 sin intervención manual. \\
+\hline
+
+\textbf{OE-03: Carga y ejecución.} Cargar y ejecutar modelos de visión y acción en el Unitree G1 Edu. &
+\textbf{Pipeline de inferencia en el borde:} creación de un proceso de ejecución en tiempo real dentro del middleware que reciba datos propioceptivos y flujos visuales, realice la inferencia localmente y envíe comandos de torque/posición. &
+\textbf{Runtime de inferencia funcional:} demostración experimental del Unitree G1 ejecutando tareas de locomoción o manipulación con los modelos cargados. \\
+\hline
+
+\textbf{OE-04: Conectividad remota.} Realizar una conexión por internet que permita cargar y ejecutar un modelo de forma remota. &
+\textbf{Arquitectura de red y teleoperación remota:} desarrollo de un servicio de red para la transferencia remota de checkpoints de modelos y datos sensoriales desde terminales externas y cascos de realidad virtual. &
+\textbf{Servicio de red de Rosberto:} conexión por internet funcional que permite a un usuario remoto subir un modelo VLA entrenado y comandar la ejecución del robot. \\
+\hline
+
+\textbf{OE-05: Optimización temporal.} Reducir el tiempo de parametrización de actuadores y carga de modelos de 1 mes a un 33\%, tomando como referencia plataformas especializadas como The Construct Robotics Institute \parencite{theconstruct2026humanoid}. &
+\textbf{Benchmarking de tiempos y pruebas de usabilidad:} medición sistemática del tiempo de preparación, configuración y despliegue usando Rosberto frente al flujo de comandos tradicional. &
+\textbf{Informe de rendimiento temporal:} comparación de tiempos que verifica el cumplimiento de la meta de reducción de 1 mes a un 33\% en los tiempos operativos. \\
+\hline
+\end{longtable}
+
+El desarrollo metodológico de Rosberto se organiza en cinco fases secuenciales e iterativas:
+
+\begin{enumerate}
+    \item Diagnóstico y análisis de requerimientos.
+    \item Diseño arquitectónico del middleware (cinco capas).
+    \item Desarrollo de la capa de datos e imitation learning.
+    \item Integración de modelos de percepción zero-shot.
+    \item Validación de seguridad, benchmarking y optimización.
+\end{enumerate}
+
+\textbf{Fase I: Diagnóstico y análisis de requerimientos técnicos.} Consiste en la identificación de las limitaciones operativas del Unitree G1 Edu y la recopilación de los requerimientos de hardware y software necesarios para el entorno académico:
+\begin{itemize}
+    \item \textbf{Análisis del embodiment:} estudio cinemático del Unitree G1 Edu (29 DoF), identificando sus sensores propioceptivos y los límites de par de sus motores.
+    \item \textbf{Requerimientos de software:} definición del ecosistema compatible con CUDA, PyTorch, LeRobot y cascos de realidad virtual Meta Quest.
+\end{itemize}
+
+\textbf{Fase II: Diseño de arquitectura del middleware.} Siguiendo los principios de abstracción de hardware y separación de responsabilidades expuestos en el marco teórico, se decide construir la capa de despliegue del middleware sobre ROS 2, y se diseña la arquitectura lógica de Rosberto en las cinco capas ya definidas conceptualmente: interacción, adquisición, datos, aprendizaje y despliegue.
+
+\textbf{Fase III: Desarrollo de la capa de datos e imitation learning.} Esta fase aborda la recolección estandarizada de datos mediante teleoperación:
+\begin{itemize}
+    \item \textbf{Adquisición de demostraciones en realidad virtual:} integración del casco Meta Quest para capturar de manera espacial y bimanual los movimientos del operador humano.
+    \item \textbf{Sincronización de datos multimodales:} desarrollo de un mecanismo que asocie temporalmente las observaciones visuales ($o_t$) con las acciones cinemáticas ($a_t$) bajo la secuencia de demostración $\tau = \left\{(o_1,a_1),(o_2,a_2),\ldots,(o_T,a_T)\right\}$ definida en el marco teórico.
+    \item \textbf{Estandarización bajo LeRobot:} exportación de los datos recolectados al formato \textit{LeRobotDataset} para crear datasets reutilizables de acceso colectivo \parencite{cadene2026lerobotopensourcelibraryendtoend}.
+\end{itemize}
+
+\textbf{Fase IV: Integración de modelos de percepción zero-shot.} Para reducir el riesgo de daños en un hardware de alto costo durante las etapas de experimentación estudiantil, se prioriza la percepción zero-shot sobre el robot físico en lugar de entrenar políticas en entornos virtuales:
+\begin{itemize}
+    \item \textbf{Percepción zero-shot:} integración de modelos base como FoundationPose y SAM 3D para permitir al robot interactuar con nuevos objetos sin necesidad de entrenamientos específicos por pieza ni de construir un entorno de simulación propio.
+\end{itemize}
+
+\textbf{Fase V: Validación de seguridad, benchmarking y optimización.} La fase final valida la eficiencia y seguridad cinemática del sistema antes del despliegue en laboratorios de pregrado:
+\begin{itemize}
+    \item \textbf{Capa de seguridad cinemática:} implementación de un nodo supervisor que monitorea el par y los límites angulares de las articulaciones del robot, interceptando comandos anómalos de las redes neuronales y gestionando una parada de emergencia por software.
+    \item \textbf{Pruebas comparativas de rendimiento temporal:} ejecución del protocolo experimental comparando el tiempo de configuración tradicional frente al despliegue automatizado con Rosberto. Esta comparación mide el tiempo operativo que le toma a una persona parametrizar los actuadores y poner en marcha un modelo, no la velocidad de carga o inferencia del modelo dentro del robot; el análisis estadístico de los tiempos medidos valida si se alcanza la reducción propuesta de 1 mes a un 33\% en dicho tiempo operativo humano.
+\end{itemize}
 
 \clearpage
 
